@@ -7,15 +7,21 @@ class App
 		var eventLoop = new EventLoop();
 
 		Console.WriteLine("1");
+
+		eventLoop.SetTimeoutTask(
+			() => 
+				{ Console.WriteLine(4); }, 
+			1000
+		);
 		
 		eventLoop.DoWithoutBlocking(
 			() => 
-				new CallbackArgument<int>(2),
+				new CallbackArgument<int>(3),
 			result =>
 				Console.WriteLine(((CallbackArgument<int>) result).Value)
 			);
 		
-		Console.WriteLine("3");
+		Console.WriteLine("4");
 
 		eventLoop.StartNonBlockingWork();
 	}
